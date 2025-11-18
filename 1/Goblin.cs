@@ -11,5 +11,17 @@ namespace _1
         public string Name { get; } = "Goblin"; 
         public int Hp { get; private set; } = 500;
         public int Atk { get; private set; } = 50;
+        public void TakeDamage(int dmg)
+        {
+            Hp -= dmg;
+            if (Hp <= 0)
+            {
+                Hp = 0;
+            }
+        }
+        public void ResetHp()
+        {
+            Hp = 500;
+        }
     }
 }

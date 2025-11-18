@@ -11,7 +11,7 @@ namespace _1
         public string Name { get; set; } = "DefaultPlayer";
         public int Hp { get; private set; } = 1000;
         public int Atk { get; private set; } = 100;
-        public void TakesDamage(int dmg)
+        public void TakeDamage(int dmg)
         {
             Hp -= dmg;
             if (Hp <= 0)

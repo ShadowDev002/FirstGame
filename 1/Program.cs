@@ -8,7 +8,7 @@ namespace _1
         {
             Player p = new Player();
             SmallHealPotion shp = new SmallHealPotion(); //its like a backpack
-            
+            Goblin g = new Goblin(); //create a goblin to fight
             bool gameRunning = true;
             Console.WriteLine("Game started!");
             while (gameRunning && p.Hp > 0)
@@ -17,7 +17,7 @@ namespace _1
                 Console.WriteLine($"Name: {p.Name}, HP: {p.Hp}");
                 Console.WriteLine("Choose an action:");
                 Console.WriteLine("(1). Explore, might find items. Or enemies...");
-                Console.WriteLine("(2). Call for enemies");
+                Console.WriteLine("(2). Call for enemies to fight");
                 Console.WriteLine($"(3). Use heal Potion. You have: {shp.Owned}");
                 Console.WriteLine("(4). Exit game. All progress will be lost");
                 string input = Console.ReadLine();
@@ -26,11 +26,11 @@ namespace _1
                 {
                     case "1":
                         ExploreController explore = new ExploreController();
-                        explore.Explore(shp); //put the thing in the so called backpack
+                        explore.Explore(shp, p, g); //put the thing in the so called backpack
                         break;
                     case "2":
                         FightController fight = new FightController();
-                        fight.Fight();
+                        fight.Fight(shp, p, g);
                         break;
                     case "3":
                         shp.Use(p); //use the potion from the backpack on the player
