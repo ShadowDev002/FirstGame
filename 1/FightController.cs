@@ -8,21 +8,16 @@ namespace _1
 {
     internal class FightController
     {
-        public void Fight(SmallHealPotion currentPotion, Player player, Goblin goblin)
+        public void Fight(SmallHealPotion currentPotion, Player player, Enemy enemy)
         {
             Random rand = new Random();
-            int goblinDamage = goblin.Atk;
+            int enemyDamage = enemy.Atk;
             int playerDamage = player.Atk;
-            if (goblin.Hp <= 0)
-            {
-                Console.WriteLine($"A goblin appeared!");
-                goblin.ResetHp();
-            }
             //fight cicle
-            while (player.Hp > 0 && goblin.Hp > 0) 
+            while (player.Hp > 0 && enemy.Hp > 0) 
             {
                 Console.WriteLine("Fight stats: ");
-                Console.WriteLine($"Player HP: {player.Hp} | Goblin HP: {goblin.Hp}");
+                Console.WriteLine($"Player HP: {player.Hp} | {enemy.Name} HP: {enemy.Hp}");
                 Console.WriteLine("Choose an action: ");
                 Console.WriteLine("(1). Fight");
                 Console.WriteLine("(2). Defense");
@@ -32,23 +27,23 @@ namespace _1
                 switch (input)
                 {
                     case "1":
-                        goblin.TakeDamage(playerDamage);
-                        Console.WriteLine($"You attacked the goblin for {playerDamage} damage!");
-                        if (goblin.Hp > 0)
+                        enemy.TakeDamage(playerDamage);
+                        Console.WriteLine($"You attacked the {enemy.Name} for {playerDamage} damage!");
+                        if (enemy.Hp > 0)
                         {
-                            player.TakeDamage(goblinDamage);
-                            Console.WriteLine($"The Goblin strikes back! You took {goblinDamage} damage.");
+                            player.TakeDamage(enemyDamage);
+                            Console.WriteLine($"The {enemy.Name} strikes back! You took {enemyDamage} damage.");
                         }
                         break;
                     case "2":
-                        player.TakeDamage(goblinDamage / 2);
-                        Console.WriteLine($"You defended against the goblin's attack! You took {goblinDamage / 2} damage.");
+                        player.TakeDamage(enemyDamage / 2);
+                        Console.WriteLine($"You defended against the {enemy.Name}'s attack! You took {enemyDamage / 2} damage.");
                         break;
                     case "3":
                         currentPotion.Use(player);
                         Console.WriteLine($"You used a {currentPotion.ItemName}! Current HP: {player.Hp}");
-                        player.TakeDamage(goblinDamage);
-                        Console.WriteLine($"Goblin attacked you with {goblinDamage} damage while you were healing!");
+                        player.TakeDamage(enemyDamage);
+                        Console.WriteLine($"{enemy.Name} attacked you with {enemyDamage} damage while you were healing!");
                         break;
                     case "4":
                         int runawayChance = rand.Next(0, 100);
@@ -59,9 +54,9 @@ namespace _1
                         }
                         else 
                         {
-                            player.TakeDamage(goblinDamage);
+                            player.TakeDamage(enemyDamage);
                             Console.WriteLine($"Failed to run away!");
-                            Console.WriteLine($"Goblin attacked you with {goblinDamage} damage!");
+                            Console.WriteLine($"{enemy.Name} attacked you with {enemyDamage} damage!");
                         }
                         break;
                     default:
@@ -72,9 +67,9 @@ namespace _1
                 {
                     player.Playerdeath();
                 }
-                else if (goblin.Hp <= 0)
+                else if (enemy.Hp <= 0)
                 {
-                    Console.WriteLine("Victory! The Goblin is dead.");
+                    Console.WriteLine($"Victory! The {enemy.Name} is dead.");
                 }
             }
         }

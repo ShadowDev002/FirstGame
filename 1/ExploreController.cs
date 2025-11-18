@@ -9,7 +9,7 @@ namespace _1
     internal class ExploreController
     {
         FightController fightController = new FightController();
-        public void Explore(SmallHealPotion currentPotion, Player player, Goblin goblin)
+        public void Explore(SmallHealPotion currentPotion, Player player)
         {
             Random rand = new Random();
             int encounterChance = rand.Next(0, 100);
@@ -23,8 +23,10 @@ namespace _1
             else
             {
                 Console.WriteLine("You encountered an enemy!");
-                fightController.Fight(currentPotion, player, goblin);
+                Enemy randomenemy = Enemy.GenerateRandomEnemy();
+                fightController.Fight(currentPotion, player, randomenemy);
             }
         }
+        
     }
 }

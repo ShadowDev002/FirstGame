@@ -8,7 +8,6 @@ namespace _1
         {
             Player p = new Player();
             SmallHealPotion shp = new SmallHealPotion(); //its like a backpack
-            Goblin g = new Goblin(); //create a goblin to fight
             bool gameRunning = true;
             Console.WriteLine("Game started!");
             while (gameRunning && p.Hp > 0)
@@ -26,11 +25,11 @@ namespace _1
                 {
                     case "1":
                         ExploreController explore = new ExploreController();
-                        explore.Explore(shp, p, g); //put the thing in the so called backpack
+                        explore.Explore(shp, p); //put the thing in the so called backpack
                         break;
                     case "2":
                         FightController fight = new FightController();
-                        fight.Fight(shp, p, g);
+                        fight.Fight(shp, p, Enemy.GenerateRandomEnemy());
                         break;
                     case "3":
                         shp.Use(p); //use the potion from the backpack on the player
