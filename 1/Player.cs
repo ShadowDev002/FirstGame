@@ -8,9 +8,21 @@ namespace _1
 {
     internal class Player
     {
-        public string Name { get; set; } = "DefaultPlayer";
-        public int Hp { get; private set; } = 1000;
-        public int Atk { get; private set; } = 100;
+        public string Name { get; set; } = "Adventurer";
+        public string ClassName { get; set; } = "None"; 
+        public int Hp { get; private set; }
+        public int MaxHp { get; private set; }
+        public int Atk { get; private set; }
+
+        public void InitializeStats(PlayerClasses choice)
+        {
+            ClassName = choice.Name;
+            Hp = choice.Hp;
+            MaxHp = choice.MaxHp;
+            Atk = choice.Atk;
+
+            //Console.WriteLine($"Class set to: {ClassName} (HP: {Hp}, ATK: {Atk})");
+        }
         public void TakeDamage(int dmg)
         {
             Hp -= dmg;
@@ -23,10 +35,11 @@ namespace _1
         public void Heal(int amount)
         {
             Hp += amount;
-            if (Hp > 1000)
+            if (Hp > MaxHp)
             {
                 Hp = 1000;
             }
+            Console.WriteLine($"Healed! Current HP: {Hp}/{MaxHp}");
         }
         public void Playerdeath()
         {
