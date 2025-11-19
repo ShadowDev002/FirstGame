@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,12 +22,26 @@ namespace _1
         {
             Hp = MaxHp;
         }
-        public static Enemy GenerateRandomEnemy()
+        public static Enemy GenerateRandomEnemy(int currentFloor)
         {
             Random r = new Random();
-            int roll = r.Next(1, 3);
-            if (roll == 1) return new Goblin();
-            else return new Zombie();
+            if (currentFloor <= 10)
+            {
+                int roll = r.Next(1, 3);
+                if (roll == 1) return new Goblin();
+                else return new Zombie();
+            } 
+            else 
+            {
+                int roll = r.Next(1, 3);
+                if (roll == 1) return new Orc();
+                else return new Wolf();
+            }
+                
+        }
+        public static Enemy GenerateDragonBoss()
+        {
+            return new Dragon();
         }
     }
 }

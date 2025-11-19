@@ -23,7 +23,7 @@ namespace _1
             else
             {
                 Console.WriteLine("You encountered an enemy!");
-                Enemy randomenemy = Enemy.GenerateRandomEnemy();
+                Enemy randomenemy = Enemy.GenerateRandomEnemy(player.CurrentFloor);
                 fightController.Fight(currentPotion, player, randomenemy);
             }
         }

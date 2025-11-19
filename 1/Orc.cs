@@ -7,14 +7,14 @@ using System.Xml.Linq;
 
 namespace _1
 {
-    internal class Zombie : Enemy
+    internal class Orc : Enemy
     {
-        public Zombie()
+        public Orc()
         {
-            Name = "Zombie";
-            Hp = 800; 
-            MaxHp = 800;
-            Atk = 30;
+            Name = "Orc";
+            Hp = 1500;
+            MaxHp = 1500;
+            Atk = 150;
         }
     }
 }

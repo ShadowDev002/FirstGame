@@ -16,6 +16,7 @@ namespace _1
             //fight cicle
             while (player.Hp > 0 && enemy.Hp > 0) 
             {
+                Console.WriteLine($"An {enemy.Name} appeared, prepare for attack!");
                 Console.WriteLine("Fight stats: ");
                 Console.WriteLine($"Player HP: {player.Hp} | {enemy.Name} HP: {enemy.Hp}");
                 Console.WriteLine("Choose an action: ");
@@ -40,14 +41,20 @@ namespace _1
                         Console.WriteLine($"You defended against the {enemy.Name}'s attack! You took {enemyDamage / 2} damage.");
                         break;
                     case "3":
-                        currentPotion.Use(player);
-                        Console.WriteLine($"You used a {currentPotion.ItemName}! Current HP: {player.Hp}");
+                        if (currentPotion.Owned > 0)
+                        {
+                            currentPotion.Use(player);
+                            Console.WriteLine($"You used a {currentPotion.ItemName}! Current HP: {player.Hp}");
+                        }
+                        else {
+                            Console.WriteLine($"You down own any {currentPotion.ItemName}!");
+                        }
                         player.TakeDamage(enemyDamage);
                         Console.WriteLine($"{enemy.Name} attacked you with {enemyDamage} damage while you were healing!");
                         break;
                     case "4":
-                        int runawayChance = rand.Next(0, 100);
-                        if (runawayChance > 50)
+                        int runawayChance = rand.Next(0, 101);
+                        if (runawayChance >= 30)
                         {
                             Console.WriteLine("You ran away from the fight!");
                             return; //exit the fight
@@ -70,6 +77,7 @@ namespace _1
                 else if (enemy.Hp <= 0)
                 {
                     Console.WriteLine($"Victory! The {enemy.Name} is dead.");
+                    //player.IncreaseFloor();
                 }
             }
         }

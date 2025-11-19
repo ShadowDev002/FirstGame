@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _1
-{   
-    internal class Goblin : Enemy
+{
+    internal class Dragon : Enemy
     {
-        public Goblin()
+        public Dragon() 
         {
-            Name = "Goblin";
-            Hp = 250;
-            MaxHp = 250;
-            Atk = 50;
+            Name = "Red Dragon";
+            Hp = 5000;
+            MaxHp = 5000;
+            Atk = 250;
         }
     }
 }

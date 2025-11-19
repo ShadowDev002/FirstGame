@@ -8,6 +8,7 @@ namespace _1
         {
             Player p = new Player();
             SmallHealPotion shp = new SmallHealPotion(); //its like a backpack
+            FightController fight = new FightController();
             bool gameRunning = true;
             bool classselected = false;
             Console.WriteLine("-------------Game started!-----------");
@@ -34,13 +35,13 @@ namespace _1
                         break;
                 }
             }
-            while (gameRunning && p.Hp > 0)
+            while (gameRunning && p.Hp > 0 && p.CurrentFloor <= 20)
             {
                 Console.Write("Current stats: ");
-                Console.WriteLine($"Name: {p.Name}, HP: {p.Hp}/{p.MaxHp}");
+                Console.WriteLine($"Name: {p.Name}, HP: {p.Hp}/{p.MaxHp}, FLOOR: {p.CurrentFloor}");
                 Console.WriteLine("Choose an action:");
                 Console.WriteLine("(1). Explore, might find items. Or enemies...");
-                Console.WriteLine("(2). Call for enemies to fight");
+                Console.WriteLine("(2). Advance to the next floor (fix battle)");
                 Console.WriteLine($"(3). Use heal Potion. You have: {shp.Owned}");
                 Console.WriteLine("(4). Exit game. All progress will be lost");
                 string input = Console.ReadLine();
@@ -52,8 +53,9 @@ namespace _1
                         explore.Explore(shp, p); //put the thing in the so called backpack
                         break;
                     case "2":
-                        FightController fight = new FightController();
-                        fight.Fight(shp, p, Enemy.GenerateRandomEnemy());
+                        Console.WriteLine($"You've advanced to the next floor!");
+                        fight.Fight(shp, p, Enemy.GenerateRandomEnemy(p.CurrentFloor));
+                        p.IncreaseFloor();
                         break;
                     case "3":
                         shp.Use(p); //use the potion from the backpack on the player
@@ -65,6 +67,15 @@ namespace _1
                         Console.WriteLine("Unknown command.");
                         break;
                 }
+                if (p.CurrentFloor == 20 && p.Hp > 0)
+                {
+                    Console.WriteLine($"You arrived at the end of this dungeon, Boss awaits you!");
+                    fight.Fight(shp, p, Enemy.GenerateDragonBoss());
+                }
+            }
+            if (p.CurrentFloor > 20)
+            {
+                Console.WriteLine("Congratulations!, you finished the dungeon!");
             }
             Console.WriteLine("Game stopped.");
             Console.ReadKey();
