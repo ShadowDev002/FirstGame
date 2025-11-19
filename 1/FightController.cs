@@ -21,7 +21,7 @@ namespace _1
                 Console.WriteLine($"Player HP: {player.Hp} | {enemy.Name} HP: {enemy.Hp}");
                 Console.WriteLine("Choose an action: ");
                 Console.WriteLine("(1). Fight");
-                Console.WriteLine("(2). Defense");
+                Console.WriteLine("(2). Dodge");
                 Console.WriteLine("(3). Heal");
                 Console.WriteLine("(4). Run away");
                 string input = Console.ReadLine();
@@ -37,8 +37,22 @@ namespace _1
                         }
                         break;
                     case "2":
-                        player.TakeDamage(enemyDamage / 2);
-                        Console.WriteLine($"You defended against the {enemy.Name}'s attack! You took {enemyDamage / 2} damage.");
+                        int dodgeChange = rand.Next(1, 11);
+                        if (dodgeChange <= 3)
+                        {
+                            Console.WriteLine($"You succesfully dodged the {enemy.Name} attack!");
+                        }
+                        else if (dodgeChange > 3 && dodgeChange <= 6)
+                        {
+                            int enemyHalfDamage = enemyDamage / 2;
+                            player.TakeDamage(enemyHalfDamage);
+                            Console.WriteLine($"You almost dodged {enemy.Name}'s attack, but it still hit you with {enemyHalfDamage} damage.");
+                        }
+                        else 
+                        {
+                            player.TakeDamage(enemyDamage);
+                            Console.WriteLine($"Oh no! You failed to dodge. {enemy.Name } hit you with {enemyDamage} damage.");
+                        }
                         break;
                     case "3":
                         if (currentPotion.Owned > 0)

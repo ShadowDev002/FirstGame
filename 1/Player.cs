@@ -13,7 +13,7 @@ namespace _1
         public int Hp { get; private set; }
         public int MaxHp { get; private set; }
         public int Atk { get; private set; }
-        public int CurrentFloor { get; private set; } = 1;
+        public int CurrentFloor { get; private set; } = 18;
 
 
         public void InitializeStats(PlayerClasses choice)

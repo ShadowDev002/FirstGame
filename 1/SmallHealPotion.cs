@@ -9,9 +9,9 @@ namespace _1
     internal class SmallHealPotion
     {
         public string ItemName { get; } = "Small Healing Potion";
-        public int HealAmount { get; } = 100;
+        public int HealAmount { get; } = 350;
         public int Price { get; } = 10;
-        public int Owned { get; private set; } = 0;
+        public int Owned { get; private set; } = 2;
 
         public void Found(int amount)
         {

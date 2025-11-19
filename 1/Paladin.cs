@@ -11,9 +11,9 @@ namespace _1
         public Paladin()
         {
             Name = "Paladin";
-            Hp = 1500;
+            Hp = 2700;
             Atk = 100;
-            MaxHp = 1500;
+            MaxHp = 2700;
         }
     }
 }
